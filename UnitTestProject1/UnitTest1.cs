@@ -31,6 +31,9 @@ namespace UnitTestProject1
             Parser parser = new Parser();
             var result = parser.Parse(data);
             Assert.IsTrue(result.Leagues.Count > 0, "Leagues are not empty");
+            Assert.IsTrue(result.Events.Count > 0, "Events are not empty");
+           // Assert.IsTrue(result.Participants.Count > 0, "Participants are not empty");
+            
         }
     }
 }

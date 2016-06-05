@@ -13,25 +13,20 @@ namespace UnitTestProject1
     {
         public IDictionary<string, League> Leagues { get; set; } = new ConcurrentDictionary<string, League>();
         public IDictionary<string, Participant> Participants { get; set; } = new ConcurrentDictionary<string, Participant>();
+        public IDictionary<string, Event> Events { get; set; } = new ConcurrentDictionary<string, Event>();
 
     }
 
     public abstract class DataItem
     {
-        protected IDictionary<string, string> _data;
+        private readonly IDictionary<string, string> _data;
 
         protected DataItem(IDictionary<string, string> data)
         {
             _data = data;
         }
 
-        protected string this[string key, string defaultValue = null]
-        {
-            get
-            {
-                return _data.ContainsKey(key) ? _data[key] : defaultValue;
-            }
-        }
+        protected string this[string key, string defaultValue = null] => _data.ContainsKey(key) ? _data[key] : defaultValue;
     }
 
     public class League : DataItem
@@ -81,6 +76,13 @@ namespace UnitTestProject1
         {
         }
 
+    }
+
+    public class Event : DataItem
+    {
+        public Event(IDictionary<string, string> data) : base(data)
+        {
+        }
     }
     class Parser
     {
@@ -157,9 +159,16 @@ namespace UnitTestProject1
                         {
                             var participantData = value.Split('|');
                             var participantId = participantData[0];
-
+                            IDictionary<string,string> dic = participantData.Select((s1, i1) => new {s1, i1}).ToDictionary(arg => arg.i1.ToString(), arg => arg.s1);
+                            result.Participants.Add(participantId,new Participant(dic));
                         }
                     }
+                }
+                else if (indexName == EVENT_INDEX)
+                {
+                    var originalId = indexValue;
+                    var id = "g_" + sportId + "_" + originalId;
+
                 }
             }
             return result;
