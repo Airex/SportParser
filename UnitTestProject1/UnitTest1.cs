@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UnitTestProject1
+namespace SportParser
 {
     [TestClass]
     public class UnitTest1
@@ -31,9 +32,24 @@ namespace UnitTestProject1
             Parser parser = new Parser();
             var result = parser.Parse(data);
             Assert.IsTrue(result.Leagues.Count > 0, "Leagues are not empty");
-            Assert.IsTrue(result.Events.Count > 0, "Events are not empty");
            // Assert.IsTrue(result.Participants.Count > 0, "Participants are not empty");
-            
+            string query = "Словения";
+
+            //            var a = from l in result.Leagues
+            //                from e in l.Value.Events
+            //                where
+            //                    string.Equals(e.Value.HomeName, query, StringComparison.CurrentCultureIgnoreCase) ||
+            //                    string.Equals(e.Value.AwayName, query, StringComparison.CurrentCultureIgnoreCase)
+            //                select new {League = l.Value, Event = e.Value};
+
+            var a = from l in result.Leagues
+
+                    where
+                       l.Value.IsTop
+                    select l.Value;
+
+            var r = a.ToList();
+//            var keyValuePairs = result.Leagues.Where(pair => string.Equals(pair.Value.CountryName ,"АРГЕНТИНА", StringComparison.InvariantCultureIgnoreCase)).Select(pair => pair.Value.Title).ToList();
         }
     }
 }

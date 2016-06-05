@@ -6,8 +6,8 @@
     <ProjectGuid>{CF392CB2-0364-47C3-A930-6FAA608AC410}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTestProject1</RootNamespace>
-    <AssemblyName>UnitTestProject1</AssemblyName>
+    <RootNamespace>SportParser</RootNamespace>
+    <AssemblyName>SportParser</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,7 +50,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DataItem.cs" />
+    <Compile Include="DateTimeUtils.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="League.cs" />
     <Compile Include="Parser.cs" />
+    <Compile Include="Participant.cs" />
+    <Compile Include="ResultHolder.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

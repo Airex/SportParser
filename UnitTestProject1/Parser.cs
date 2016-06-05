@@ -1,89 +1,9 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace UnitTestProject1
+namespace SportParser
 {
-
-    public class ResultHolder
-    {
-        public IDictionary<string, League> Leagues { get; set; } = new ConcurrentDictionary<string, League>();
-        public IDictionary<string, Participant> Participants { get; set; } = new ConcurrentDictionary<string, Participant>();
-        public IDictionary<string, Event> Events { get; set; } = new ConcurrentDictionary<string, Event>();
-
-    }
-
-    public abstract class DataItem
-    {
-        private readonly IDictionary<string, string> _data;
-
-        protected DataItem(IDictionary<string, string> data)
-        {
-            _data = data;
-        }
-
-        protected string this[string key, string defaultValue = null] => _data.ContainsKey(key) ? _data[key] : defaultValue;
-    }
-
-    public class League : DataItem
-    {
-        public string Id => this["Id"];
-        public string OriginalId => Id.Split('_')[1];
-        public string SortKey => this["ZX"];
-        public bool HasTable => this["ZG"] == "1";
-        public bool HasLiveTable => this["ZO"] == "1";
-        public bool HasDraw => this["ZG"] == "2";
-        public string Title => this["ZA"];
-        public string CountryId => this["ZB"];
-        public string CountryName => this["ZY"];
-        public string TournamentId => this["ZE"];
-        public string TournamentStageId => this["ZC"];
-        public string TournamentType => this["ZD"];
-        public string TournamentStageType => this["ZJ"];
-        public string TournamentTemplateKey => this["ZH"];
-        public string RaceType => this["ZM"];
-        public string CategoryId => TournamentTemplateKey?.Split('_')[0];
-        public bool IsRaceTypeRace => RaceType == "r";
-        public bool IsRaceTypePractice => RaceType == "p";
-        public string RaceInfoText => this["ZN"];
-        public string PrizeMoney => this["ZP"];
-        public string Par => this["ZQ"];
-        public string EventId => this["ZZ"];
-        public string MeetingId => this["QM"];
-        public string StageTabs => this["ZV"];
-        public string Url => this["ZL"];
-        public string SportId => this["sport_id"];
-        public string SportName => this["sport"];
-        public string IsOpen => this["display"];
-        public string EventCount => this["g_count"];
-        public bool IsPrimary => TournamentType == "p";
-        public bool IsSecondary => TournamentType == "s";
-        public bool IsTop => TournamentType == "t";
-        public bool IsClosed => TournamentType == "c";
-
-        public League(IDictionary<string, string> data) : base(data)
-        {
-        }
-    }
-
-    public class Participant:DataItem
-    {
-        public Participant(IDictionary<string, string> data) : base(data)
-        {
-        }
-
-    }
-
-    public class Event : DataItem
-    {
-        public Event(IDictionary<string, string> data) : base(data)
-        {
-        }
-    }
     class Parser
     {
         const char RowEnd = '~';
@@ -108,6 +28,7 @@ namespace UnitTestProject1
             ResultHolder result = new ResultHolder();
 
             string sportId = null;
+            string lableId = null;
             var rows = s.Split(RowEnd);
             foreach (var row in rows)
             {
@@ -123,6 +44,7 @@ namespace UnitTestProject1
                 {
                     indexValue = index[1];
                 }
+               
                 if (indexName == SPORT_INDEX)
                 {
                     sportId = indexValue;
@@ -144,7 +66,7 @@ namespace UnitTestProject1
 
                     }
                     dic.Add("display", (dic["ZD"] != "c").ToString());
-                    var lableId = sportId + "_" + dic["ZC"];
+                    lableId = sportId + "_" + dic["ZC"];
 
                     result.Leagues.Add(lableId, new League(dic));
                 }
@@ -166,9 +88,34 @@ namespace UnitTestProject1
                 }
                 else if (indexName == EVENT_INDEX)
                 {
+                    IDictionary<string,string> dic = new ConcurrentDictionary<string, string>();
                     var originalId = indexValue;
                     var id = "g_" + sportId + "_" + originalId;
+                    dic.Add("labl_id", lableId);
+                    dic.Add("original_id", originalId);
+                    for (int i = 1; i < colsLength; i++)
+                    {
+                        var rowParts = cols[i].Split(IndexDelimiter);
+                        if (rowParts.Length!=2) continue;
 
+                        var key = rowParts[0];
+                        var new_value_string = rowParts[1];
+
+                        if (key == "EA" || key == "EB" || key == "EC" || key == "ED")
+                            continue;
+                        var new_value = new_value_string;
+                        if (dic.ContainsKey(key))
+                            dic[key] = new_value;
+                        else dic.Add(key,new_value);
+
+                    }
+                    var league = result.Leagues[lableId];
+                    league.Events.Add(id, new Event(dic));
+
+                }
+                else if (indexName == TOP_LEAGUES_INDEX)
+                {
+                    var tmp = indexValue;
                 }
             }
             return result;
