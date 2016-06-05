@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SportParser
 {
-    class Parser
+    public class Parser
     {
         const char RowEnd = '~';
         const char CellEnd = '¬';

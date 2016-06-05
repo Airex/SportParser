@@ -7,3 +7,6 @@
 *.user
 *.suo
 /.vs/config
+/packages/NUnit.3.2.1
+/SportParser/bin/Debug
+/SportParser/obj/Debug

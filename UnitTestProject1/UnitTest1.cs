@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SportParser;
 
-namespace SportParser
+namespace UnitTests
 {
     [TestClass]
     public class UnitTest1
@@ -28,7 +29,6 @@ namespace SportParser
             
             var data = reader.ReadToEnd();
             Console.Write(data);
-
             Parser parser = new Parser();
             var result = parser.Parse(data);
             Assert.IsTrue(result.Leagues.Count > 0, "Leagues are not empty");
