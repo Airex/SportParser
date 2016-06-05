@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTestProjec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportParser", "SportParser\SportParser.csproj", "{9113A503-4AB5-456B-8F6E-D3D026061FED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot", "TelegramBot\TelegramBot.csproj", "{8CB6596F-9F8F-4C09-A019-137D790F46FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9113A503-4AB5-456B-8F6E-D3D026061FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9113A503-4AB5-456B-8F6E-D3D026061FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9113A503-4AB5-456B-8F6E-D3D026061FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CB6596F-9F8F-4C09-A019-137D790F46FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CB6596F-9F8F-4C09-A019-137D790F46FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CB6596F-9F8F-4C09-A019-137D790F46FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CB6596F-9F8F-4C09-A019-137D790F46FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

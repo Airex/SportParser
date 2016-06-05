@@ -10,3 +10,5 @@
 /packages/NUnit.3.2.1
 /SportParser/bin/Debug
 /SportParser/obj/Debug
+/packages
+/TelegramBot/obj/Debug
