@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.2.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -47,11 +51,7 @@
         <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
       </ItemGroup>
     </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
   <ItemGroup>
     <Compile Include="UnitTest1.cs" />
@@ -61,6 +61,10 @@
     <ProjectReference Include="..\SportParser\SportParser.csproj">
       <Project>{9113a503-4ab5-456b-8f6e-d3d026061fed}</Project>
       <Name>SportParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TelegramBot.Core\TelegramBot.Core.csproj">
+      <Project>{A6E41636-4C6A-4428-93B5-47A7E337F7EE}</Project>
+      <Name>TelegramBot.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

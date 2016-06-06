@@ -12,3 +12,8 @@
 /SportParser/obj/Debug
 /packages
 /TelegramBot/obj/Debug
+/TelegramBot/bin
+/TelegramBot.Contracts/bin/Debug
+/TelegramBot.Contracts/obj/Debug
+/TelegramBot.Core/bin/Debug
+/TelegramBot.Core/obj/Debug
