@@ -117,10 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Game15CommandHandler_ProcessCommand_your_move___15_to_restart" xml:space="preserve">
+    <value>Ваш ход. /15 что бы начать заново</value>
+  </data>
+  <data name="Game15CommandHandler_ProcessCommand_you_won___15_to_restart" xml:space="preserve">
+    <value>Вы выиграли. /15 что бы начать заново</value>
+  </data>
   <data name="helpCommand" xml:space="preserve">
-    <value>Я бот. Список моих доступных комманд:
-/help
-/language</value>
+    <value>Я бот. Список моих доступных комманд:</value>
   </data>
   <data name="languageChanged" xml:space="preserve">
     <value>Язык изменен</value>

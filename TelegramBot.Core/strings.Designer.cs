@@ -61,9 +61,25 @@ namespace TelegramBot.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I am bot. My available commands are:
-        ////help
-        ////language.
+        ///   Looks up a localized string similar to you won. /15 to restart.
+        /// </summary>
+        internal static string Game15CommandHandler_ProcessCommand_you_won___15_to_restart {
+            get {
+                return ResourceManager.GetString("Game15CommandHandler_ProcessCommand_you_won___15_to_restart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to your move. /15 to restart.
+        /// </summary>
+        internal static string Game15CommandHandler_ProcessCommand_your_move___15_to_restart {
+            get {
+                return ResourceManager.GetString("Game15CommandHandler_ProcessCommand_your_move___15_to_restart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I am bot. My available commands are:.
         /// </summary>
         internal static string helpCommand {
             get {

@@ -118,9 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="helpCommand" xml:space="preserve">
-    <value>Я бот. Перелік моїх команд:
-/help
-/language</value>
+    <value>Я бот. Перелік моїх команд:</value>
   </data>
   <data name="languageChanged" xml:space="preserve">
     <value>Мову змінено</value>
@@ -130,5 +128,11 @@
   </data>
   <data name="unknownCommand" xml:space="preserve">
     <value>Невідома команда. Спробуйте /help для додаткової інформації.</value>
+  </data>
+  <data name="Game15CommandHandler_ProcessCommand_your_move___15_to_restart" xml:space="preserve">
+    <value>Ваш хід. /15 щоб почати знову</value>
+  </data>
+  <data name="Game15CommandHandler_ProcessCommand_you_won___15_to_restart" xml:space="preserve">
+    <value>Ви играли. /15 щоб почати знову</value>
   </data>
 </root>

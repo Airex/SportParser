@@ -58,6 +58,7 @@ namespace TelegramBot.Core
                 return true;
             var userData = UserSettings.GetUserData(updateObject.message.@from.id);
             var previousCommand = userData.CommandsHistory.PreviousCommand;
+            if (previousCommand == null) return false;
             return commands[0].Equals(previousCommand.message.text.Trim()) && commands.Skip(1).Any(s => s.Equals(updateObject.message.text.Trim(), StringComparison.InvariantCultureIgnoreCase) );
 
         }

@@ -118,9 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="helpCommand" xml:space="preserve">
-    <value>I am bot. My available commands are:
-/help
-/language</value>
+    <value>I am bot. My available commands are:</value>
   </data>
   <data name="languageChanged" xml:space="preserve">
     <value>Languge changed</value>
@@ -130,5 +128,11 @@
   </data>
   <data name="LanguageCommandHandler_ProcessCommand_Select_language" xml:space="preserve">
     <value>Select language</value>
+  </data>
+  <data name="Game15CommandHandler_ProcessCommand_you_won___15_to_restart" xml:space="preserve">
+    <value>you won. /15 to restart</value>
+  </data>
+  <data name="Game15CommandHandler_ProcessCommand_your_move___15_to_restart" xml:space="preserve">
+    <value>your move. /15 to restart</value>
   </data>
 </root>
