@@ -59,6 +59,22 @@ namespace TelegramBot.Core
         public ReplyMarkup reply_markup { get; set; }
     }
 
+    public class ReplyKeyboardMarkup:ReplyMarkup
+    {
+        public KeyboardButton[][] keyboard { get; set; }
+        public bool? resize_keyboard { get; set; } = null;
+        public bool? one_time_keyboard { get; set; } = null;
+        public bool? selective { get; set; } = null;
+
+    }
+
+    public class KeyboardButton
+    {
+        public string text { get; set; }
+        public bool? request_contact { get; set; }
+        public bool? request_location { get; set; }
+    }
+
     public abstract class ReplyMarkup { }
    
 }

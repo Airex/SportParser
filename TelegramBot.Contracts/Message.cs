@@ -7,6 +7,16 @@
         public Chat chat { get; set; }
         public int date { get; set; }
         public string text { get; set; }
+        public MessageEntity[] entities { get; set; }
 
+    }
+
+    public class MessageEntity
+    {
+        public string type { get; set; }
+        public int offset { get; set; }
+        public int length { get; set; }
+        public string url { get; set; }
+        public User user { get; set; }
     }
 }

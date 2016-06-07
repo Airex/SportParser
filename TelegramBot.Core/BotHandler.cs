@@ -1,4 +1,6 @@
-﻿using TelegramBot.Contracts;
+﻿using System.Globalization;
+using System.Threading;
+using TelegramBot.Contracts;
 
 namespace TelegramBot.Core
 {
@@ -6,15 +8,18 @@ namespace TelegramBot.Core
     {
         public void Process(UpdateObject input)
         {
-            var id = input.message.chat.id;
-            var text = input.message.text;
-            ApiRequest apiRequest = new ApiRequest();
-
-            apiRequest.ExecuteMethod(new sendMessage()
-            {
-                chat_id                = id,
-                text = "Got text: "+text
-            });
+            var userData = UserSettings.GetUserData(input.message.@from.id);
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(userData.Language);
+            IBotCommandFactory botCommandFactory = new BotCommandFactory(new IBotCommandHandler[] {new HelpCommandHandler(), new LanguageCommandHandler()});
+            var resolveCommandHandler = botCommandFactory.ResolveCommandHandler(input);
+            resolveCommandHandler?.ProcessCommand(input);
+            userData.CommandsHistory.Add(input);
         }
+    }
+
+    public interface IBotCommandHandler
+    {
+        void ProcessCommand(UpdateObject updateObject);
+        bool CanHandle(UpdateObject updateObject);
     }
 }
