@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Botanio.Api;
 using NUnit.Framework;
 using TelegramBot.Core;
 
@@ -45,6 +46,12 @@ namespace UnitTests
                 text   = "🇺🇦",
                 
             });
+        }
+
+        [Test]
+        public void BotanTest()
+        {
+            Botan.Track("1","1234","test");
         }
     }
 }

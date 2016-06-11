@@ -62,6 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Botanio.Api\Botanio.Api.csproj">
+      <Project>{4562B1E3-F686-4B06-B82B-44066FD04B49}</Project>
+      <Name>Botanio.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SportParser\SportParser.csproj">
       <Project>{9113a503-4ab5-456b-8f6e-d3d026061fed}</Project>
       <Name>SportParser</Name>

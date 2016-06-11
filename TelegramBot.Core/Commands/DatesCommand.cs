@@ -14,16 +14,16 @@ namespace TelegramBot.Core.Commands
             var text = updateObject.message.text;
 
             if (text == EmojiUtils.HomeIcon + "Home")
+            {
+                userData.OperationDate = DateTime.Now.Date;
                 return "/mainmenu";
+            }
             if (text == "Today")
                 userData.OperationDate = DateTime.Now.Date;
             else
             {
                 DateTime date;
-                if (DateTime.TryParseExact(text, "dd.MM", null, DateTimeStyles.None, out date))
-                {
-                    userData.OperationDate = date;
-                }
+                userData.OperationDate = DateTime.TryParseExact(text, "dd.MM", null, DateTimeStyles.None, out date) ? date : DateTime.Now.Date;
             }
 
             apiRequest.ExecuteMethod(new sendMessage()

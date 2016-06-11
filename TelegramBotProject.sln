@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.Core", "Telegra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.Contracts", "TelegramBot.Contracts\TelegramBot.Contracts.csproj", "{99BBA368-0F96-4239-9450-676CF74A11B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Botanio.Api", "Botanio.Api\Botanio.Api.csproj", "{4562B1E3-F686-4B06-B82B-44066FD04B49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{99BBA368-0F96-4239-9450-676CF74A11B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99BBA368-0F96-4239-9450-676CF74A11B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99BBA368-0F96-4239-9450-676CF74A11B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4562B1E3-F686-4B06-B82B-44066FD04B49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4562B1E3-F686-4B06-B82B-44066FD04B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4562B1E3-F686-4B06-B82B-44066FD04B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4562B1E3-F686-4B06-B82B-44066FD04B49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -116,6 +116,10 @@
     <Compile Include="UserSettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Botanio.Api\Botanio.Api.csproj">
+      <Project>{4562B1E3-F686-4B06-B82B-44066FD04B49}</Project>
+      <Name>Botanio.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SportParser\SportParser.csproj">
       <Project>{9113A503-4AB5-456B-8F6E-D3D026061FED}</Project>
       <Name>SportParser</Name>

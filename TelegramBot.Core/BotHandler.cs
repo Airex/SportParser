@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading;
-
+using Botanio.Api;
 using SportParser;
 using TelegramBot.Contracts;
 
@@ -36,6 +36,7 @@ namespace TelegramBot.Core
                 {
                     if (resolveCommandHandler != null)
                     {
+                        Botan.Track(input.message.from.id.ToString(),input.message.text,resolveCommandHandler.GetType().Name);
                         commandResult = resolveCommandHandler.ProcessCommand(_apiRequest, _dataManager, input);
                         if (commandResult != null)
                         {
