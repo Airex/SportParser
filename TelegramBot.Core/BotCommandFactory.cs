@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TelegramBot.Contracts;
+using TelegramBot.Core.Commands;
 
 namespace TelegramBot.Core
 {
@@ -15,9 +16,21 @@ namespace TelegramBot.Core
 
         public IBotCommandHandler ResolveCommandHandler(UpdateObject updateObject)
         {
-
-            return _handlers?.FirstOrDefault(botCommandHandler => botCommandHandler.CanHandle(updateObject)) ??
-                   new UnknownCommandHandler();
+            var userData = UserSettings.GetUserData(updateObject.message.@from.id);
+            var currectHandlerContext = userData.CurrectHandlerContext;
+            if (currectHandlerContext != null)
+            {
+                var resolveCommandHandler =
+                    _handlers.SingleOrDefault(handler => handler.GetType().Name == currectHandlerContext);
+                if (resolveCommandHandler != null)
+                {
+                    if (resolveCommandHandler.CanHandle(updateObject))
+                        return resolveCommandHandler;
+                }
+            }
+            return
+                _handlers.OrderBy(handler => handler.Priority)
+                    .FirstOrDefault(botCommandHandler => botCommandHandler.CanHandle(updateObject));
         }
     }
 }

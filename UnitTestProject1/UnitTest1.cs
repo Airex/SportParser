@@ -41,8 +41,9 @@ namespace UnitTests
             ApiRequest apiRequest = new ApiRequest();
             apiRequest.ExecuteMethod(new sendMessage()
             {
-                chat_id = 121750334,
-                text   = "а то"
+                chat_id = 128756198,
+                text   = "🇺🇦",
+                
             });
         }
     }

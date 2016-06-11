@@ -1,129 +1,63 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
+
+using SportParser;
 using TelegramBot.Contracts;
 
 namespace TelegramBot.Core
 {
     public class BotHandler
     {
+        private readonly IApiRequest _apiRequest;
+        private readonly IBotCommandFactory _botCommandFactory;
+        private readonly IDataManager _dataManager;
+
+        public BotHandler(IApiRequest apiRequest, IBotCommandFactory botCommandFactory, IDataManager dataManager)
+        {
+            _apiRequest = apiRequest;
+            _botCommandFactory = botCommandFactory;
+            _dataManager = dataManager;
+        }
+
         public void Process(UpdateObject input)
         {
+            var stamp = DateTimeManager.FromTimeStamp(input.message.date);
+            if ((DateTime.Now - stamp).TotalMinutes > 10) return;
+            
             var userData = UserSettings.GetUserData(input.message.@from.id);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(userData.Language);
-            IBotCommandFactory botCommandFactory = new BotCommandFactory(new IBotCommandHandler[] {new HelpCommandHandler(), new LanguageCommandHandler(), new Game15CommandHandler(), });
-            var resolveCommandHandler = botCommandFactory.ResolveCommandHandler(input);
-            resolveCommandHandler?.ProcessCommand(input);
-            userData.CommandsHistory.Add(input);
-        }
-    }
-
-    public interface IBotCommandHandler
-    {
-        void ProcessCommand(UpdateObject updateObject);
-        bool CanHandle(UpdateObject updateObject);
-    }
-
-    public class Game15CommandHandler : IBotCommandHandler
-    {
-        public void ProcessCommand(UpdateObject updateObject)
-        {
-            var userData = UserSettings.GetUserData(updateObject.message.@from.id);
-            var game15Data = userData.Game15Data;
-            bool hasChanges = false;
-            if (game15Data == null || updateObject.message.text == "/15")
+            string commandResult = null;
+            do
             {
-                game15Data = new int[16];
-                for (var i = 0; i < 16; i++)
+                var resolveCommandHandler = _botCommandFactory.ResolveCommandHandler(input);
+
+                try
                 {
-                    game15Data[i] = i;
-                }
-                Random r = new Random(Environment.TickCount);
-                game15Data = game15Data.Select(i => new {i, ran = r.Next(1000)})
-                    .OrderBy(arg => arg.ran)
-                    .Select(arg => arg.i)
-                    .ToArray();
-                hasChanges = true;
-            }
-            else
-            {
-                var i = int.Parse(updateObject.message.text);
-                if (i > 0)
-                {
-                    var indexOf = Array.IndexOf(game15Data, i);
-                    var offset = new[] {-1, 1, -4, 4};
-                    foreach (int t in offset)
+                    if (resolveCommandHandler != null)
                     {
-                        var index = indexOf +t;
-                        if (index >= 0 && index < 16 && game15Data[index] == 0)
+                        commandResult = resolveCommandHandler.ProcessCommand(_apiRequest, _dataManager, input);
+                        if (commandResult != null)
                         {
-                            game15Data[index] = i;
-                            game15Data[indexOf] = 0;
-                            hasChanges = true;
+                            userData.CurrectHandlerContext = null;
+                            input.message.text = commandResult;
                         }
+                        userData.CommandsHistory.Add(input);
+                        if (resolveCommandHandler.SupportContext)
+                            userData.CurrectHandlerContext = resolveCommandHandler.GetType().Name;
+
                     }
                 }
-            }
-            if (hasChanges)
-            {
-                userData.Game15Data = game15Data;
-                var d = game15Data.Select(i => i == 0 ? " " : i.ToString()).ToArray();
-                KeyboardButton[][] b =
+                catch (NotImplementedException)
                 {
-                    new[]
+                    _apiRequest.ExecuteMethod(new sendMessage()
                     {
-                        new KeyboardButton() {text = d[0]}, new KeyboardButton() {text = d[1]},
-                        new KeyboardButton() {text = d[2]}, new KeyboardButton() {text = d[3]},
-                    },
-                    new[]
-                    {
-                        new KeyboardButton() {text = d[4]}, new KeyboardButton() {text = d[5]},
-                        new KeyboardButton() {text = d[6]}, new KeyboardButton() {text = d[7]},
-                    },
-                    new[]
-                    {
-                        new KeyboardButton() {text = d[8]}, new KeyboardButton() {text = d[9]},
-                        new KeyboardButton() {text = d[10]}, new KeyboardButton() {text = d[11]},
-                    },
-                    new[]
-                    {
-                        new KeyboardButton() {text = d[12]}, new KeyboardButton() {text = d[13]},
-                        new KeyboardButton() {text = d[14]}, new KeyboardButton() {text = d[15]},
-                    },
-
-                };
-                bool isWin = true;
-                for (int i = 0; i < 16; i++)
-                {
-                    if (game15Data[i] != i + 1 && (i != 15 || game15Data[i] != 0))
-                    {
-                        isWin = false;
-                        break;
-                        ;
-                    }
+                        text = "This feature is under development",
+                        chat_id = input.message.chat.id,
+                        reply_to_message_id = input.message.message_id
+                    });
                 }
-
-                ApiRequest apiRequest = new ApiRequest();
-                apiRequest.ExecuteMethod(new sendMessage()
-                {
-                    chat_id = updateObject.message.chat.id,
-                    text = isWin ? strings.Game15CommandHandler_ProcessCommand_you_won___15_to_restart : strings.Game15CommandHandler_ProcessCommand_your_move___15_to_restart,
-                    reply_markup = new ReplyKeyboardMarkup
-                    {
-                        keyboard = b,
-                        one_time_keyboard = false
-                    }
-                });
-            }
-
-        }
-
-        public bool CanHandle(UpdateObject updateObject)
-        {
-            if (updateObject.message.text.Equals("/15")) return true;
-            int value;
-            return int.TryParse(updateObject.message.text, out value) && value >= 1 && value <= 15;
+            } while (commandResult != null);
         }
     }
 }

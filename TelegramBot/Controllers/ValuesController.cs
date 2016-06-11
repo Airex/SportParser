@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Helpers;
 using System.Web.Http;
 using TelegramBot.Contracts;
 using TelegramBot.Core;
 
 namespace TelegramBot.Controllers
 {
-
+    
     public class DoController : ApiController
     {
+        private readonly BotHandler _botHandler;
+
+        public DoController(BotHandler botHandler)
+        {
+            _botHandler = botHandler;
+        }
+
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return new string[] {"value1", "value2"};
+            return new[] {"value1", "value2"};
         }
 
         // GET api/values/5
@@ -28,9 +33,15 @@ namespace TelegramBot.Controllers
         // POST api/values
         public HttpResponseMessage Post(UpdateObject input)
         {
-
-            BotHandler botHandler = new BotHandler();
-            botHandler.Process(input);
+            try
+            {
+                _botHandler.Process(input);
+            }
+            catch (Exception)
+            {
+                
+            }
+           
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 

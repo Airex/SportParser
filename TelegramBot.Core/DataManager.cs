@@ -8,7 +8,7 @@ using SportParser;
 
 namespace TelegramBot.Core
 {
-    public class DataManager
+    public class DataManager : IDataManager
     {
         private readonly IDictionary<DateTime, DataContainer> _data = new ConcurrentDictionary<DateTime, DataContainer>();
         private readonly IUpdateStrategy _updateStrategy;
@@ -21,7 +21,7 @@ namespace TelegramBot.Core
             _feedLoader = feedLoader;
         }
 
-        private ResultHolder GetData(DateTime date)
+        private ResultHolder GetData(DateTime date, bool forceUpdate)
         {
             var now = DateTime.Now.Date;
             var timeSpan = date.Date - now;
@@ -32,7 +32,7 @@ namespace TelegramBot.Core
                 if (_data.ContainsKey(date.Date))
                 {
                     var container = _data[date.Date];
-                    if (container.Data == null || _updateStrategy.NeedUpdate(container.LastUpdate))
+                    if (container.Data == null || forceUpdate || _updateStrategy.NeedUpdate(container.LastUpdate,date))
                     {
                         var result = _feedLoader.LoadData(date.Date);
                         _data[date.Date].Update(result);
@@ -47,7 +47,7 @@ namespace TelegramBot.Core
             }
         }
 
-        public object ExecuteCommand(ICommand command)
+        public IDictionary<DateTime, League[]> ExecuteCommand(ICommand command)
         {
             return command.Execute(GetData);
         }

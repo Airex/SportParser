@@ -67,7 +67,7 @@ namespace SportParser
         public string CountryName => this["CC"];
         public string OriginalId => this["original_id"];
 
-        public DateTime StartUDateTime => DateTimeUtils.FromTimeStamp(Convert.ToDouble(StartUTime));
+        public DateTime StartUDateTime => DateTimeManager.FromTimeStamp(Convert.ToDouble(StartUTime));
 
         public override string ToString()
         {

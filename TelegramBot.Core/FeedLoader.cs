@@ -11,7 +11,7 @@ namespace TelegramBot.Core
             var timeSpan = date.Date - DateTime.Now.Date;
             var totalDays = timeSpan.TotalDays;
 
-            var requestUriString = "http://"+$"d.myscore.com.ua/x/feed/f_1_0_{totalDays}_ru_1";
+            var requestUriString = "http://"+$"d.myscore.com.ua/x/feed/f_1_{totalDays}_3_ru_1";
             var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(requestUriString);
             request.Headers.Add("X-Requested-With", "XMLHttpRequest");
             request.Accept = "*";

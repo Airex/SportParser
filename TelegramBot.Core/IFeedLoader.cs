@@ -7,4 +7,6 @@ namespace TelegramBot.Core
     {
         ResultHolder LoadData(DateTime date);
     }
+
+   
 }

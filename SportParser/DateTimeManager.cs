@@ -2,7 +2,7 @@
 
 namespace SportParser
 {
-    public class DateTimeUtils
+    public class DateTimeManager
     {
         public static DateTime FromTimeStamp(double timeStamp)
         {

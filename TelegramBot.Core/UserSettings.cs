@@ -28,5 +28,6 @@ namespace TelegramBot.Core
         }
 
         public UpdateObject PreviousCommand => _list.LastOrDefault();
-    }
+
+   }
 }

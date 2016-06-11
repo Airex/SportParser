@@ -1,4 +1,6 @@
-﻿namespace TelegramBot.Core
+﻿using System;
+
+namespace TelegramBot.Core
 {
     public class UserData
     {
@@ -6,5 +8,6 @@
         public  CommandsHistory CommandsHistory { get; } = new CommandsHistory();
         public string CurrectHandlerContext { get; set; }
         public int[] Game15Data { get; set; }
+        public DateTime OperationDate { get; set; } = DateTime.Now.Date;
     }
 }
