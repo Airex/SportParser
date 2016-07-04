@@ -135,4 +135,70 @@
   <data name="Game15CommandHandler_ProcessCommand_your_move___15_to_restart" xml:space="preserve">
     <value>your move. /15 to restart</value>
   </data>
+  <data name="This_feature_is_under_development" xml:space="preserve">
+    <value>This feature is under development</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="Now" xml:space="preserve">
+    <value>Now</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Available_commands" xml:space="preserve">
+    <value>Available commands:</value>
+  </data>
+  <data name="Live_now" xml:space="preserve">
+    <value>Live now:</value>
+  </data>
+  <data name="Results_on" xml:space="preserve">
+    <value>Results on</value>
+  </data>
+  <data name="Matches_schedule_on" xml:space="preserve">
+    <value>Matches schedule on</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>TimeZone</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Available_settings" xml:space="preserve">
+    <value>Available settings:</value>
+  </data>
+  <data name="Select_your_timezone" xml:space="preserve">
+    <value>Enter your timezone offset from -12 to 12 or select {0} to attach you current location to identify it automatically.</value>
+  </data>
+  <data name="Timezone_was_updated" xml:space="preserve">
+    <value>Timezone was updated</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Invalid_value_was_entered" xml:space="preserve">
+    <value>Invalid value was entered</value>
+  </data>
+  <data name="Send_my_location" xml:space="preserve">
+    <value>Send my location</value>
+  </data>
+  <data name="Timezone_identified_as" xml:space="preserve">
+    <value>Timezone identified as {1} {0} </value>
+  </data>
+  <data name="Timezone_was_not_identified__Continue_to_use_default_one" xml:space="preserve">
+    <value>Timezone was not identified. Continue to use default one.</value>
+  </data>
 </root>

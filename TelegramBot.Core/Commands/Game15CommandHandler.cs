@@ -6,9 +6,8 @@ namespace TelegramBot.Core.Commands
 {
     public class Game15CommandHandler : IBotCommandHandler
     {
-        public string ProcessCommand(IApiRequest apiRequest, IDataManager dataManager, UpdateObject updateObject)
+        public string ProcessCommand(IApiRequest apiRequest, IDataManager dataManager, UpdateObject updateObject, UserData userData)
         {
-            var userData = UserSettings.GetUserData(updateObject.message.@from.id);
             var game15Data = userData.Game15Data;
             bool hasChanges = false;
             if (game15Data == null || updateObject.message.text == "/15")
@@ -93,7 +92,7 @@ namespace TelegramBot.Core.Commands
                         one_time_keyboard = false
                     },
                     disable_notification = true,
-                    reply_to_message_id = updateObject.message.message_id
+                    
                 });
             }
             return null;    

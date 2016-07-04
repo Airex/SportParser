@@ -5,7 +5,7 @@ namespace TelegramBot.Core.Commands
     public class UnknownCommandHandler : IBotCommandHandler
     {
 
-        public string ProcessCommand(IApiRequest apiRequest, IDataManager dataManager, UpdateObject updateObject)
+        public string ProcessCommand(IApiRequest apiRequest, IDataManager dataManager, UpdateObject updateObject, UserData userData)
         {
             apiRequest.ExecuteMethod(new sendMessage
             {

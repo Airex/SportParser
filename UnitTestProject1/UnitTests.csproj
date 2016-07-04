@@ -39,6 +39,14 @@
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -48,6 +56,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -70,9 +79,17 @@
       <Project>{9113a503-4ab5-456b-8f6e-d3d026061fed}</Project>
       <Name>SportParser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TelegramBot.Contracts\TelegramBot.Contracts.csproj">
+      <Project>{99BBA368-0F96-4239-9450-676CF74A11B7}</Project>
+      <Name>TelegramBot.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TelegramBot.Core\TelegramBot.Core.csproj">
       <Project>{A6E41636-4C6A-4428-93B5-47A7E337F7EE}</Project>
       <Name>TelegramBot.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TelegramBot.DataAccess\TelegramBot.DataAccess.csproj">
+      <Project>{597b6222-6730-4c11-b820-0c7208a5ca13}</Project>
+      <Name>TelegramBot.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using Newtonsoft.Json;
@@ -12,8 +13,8 @@ namespace TelegramBot.Core
 
     public class ApiRequest : IApiRequest
     {
-        private string _botToken = "144111852:AAFt_JWdplHY4FxV1e2Rn1zjVqBPdWOirk8";
-        private string _apiUrl= "https://api.telegram.org/bot";
+        private readonly string _botToken = ConfigurationManager.AppSettings["telegram.bot.token"];
+        private readonly string _apiUrl= ConfigurationManager.AppSettings["telegram.bot.url"];
 
         public void ExecuteMethod(IMethod method)
         {
@@ -35,50 +36,20 @@ namespace TelegramBot.Core
             var webRequest = WebRequest.Create(requestUriString);
             webRequest.Method = "POST";
             webRequest.ContentType = "application/json";
-            var requestStream = webRequest.GetRequestStream();
-            var bytes = System.Text.Encoding.UTF8.GetBytes(body);
-            requestStream.Write(bytes,0,bytes.Length);
-            requestStream.Close();
+            using (var requestStream = webRequest.GetRequestStream())
+            {
+                var bytes = System.Text.Encoding.UTF8.GetBytes(body);
+                requestStream.Write(bytes,0,bytes.Length);
+            }
             var webResponse = webRequest.GetResponse();
-            var responseStream = webResponse.GetResponseStream();
-            var reader = new StreamReader(responseStream);
-            var response = reader.ReadToEnd();
-            Console.WriteLine(response);
+
+            using (var responseStream = webResponse.GetResponseStream())
+                if (responseStream != null)
+                    using (var reader = new StreamReader(responseStream))
+                    {
+                        var response = reader.ReadToEnd();
+                        Console.WriteLine(response);
+                    }
         }
     }
-
-    public interface IMethod
-    {
-        
-    }
-
-    public class sendMessage:IMethod
-    {
-        public int chat_id { get; set; }
-        public string text { get; set; }
-        public string parse_mode { get; set; } = "";
-        public bool? disable_web_page_preview { get; set; } = false;
-        public bool? disable_notification { get; set; } = false;
-        public int? reply_to_message_id { get; set; }
-        public ReplyMarkup reply_markup { get; set; }
-    }
-
-    public class ReplyKeyboardMarkup:ReplyMarkup
-    {
-        public KeyboardButton[][] keyboard { get; set; }
-        public bool? resize_keyboard { get; set; } = null;
-        public bool? one_time_keyboard { get; set; }
-        public bool? selective { get; set; } = null;
-
-    }
-
-    public class KeyboardButton
-    {
-        public string text { get; set; }
-        public bool? request_contact { get; set; }
-        public bool? request_location { get; set; }
-    }
-
-    public abstract class ReplyMarkup { }
-   
 }

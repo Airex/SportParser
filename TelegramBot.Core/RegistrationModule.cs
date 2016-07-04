@@ -24,6 +24,10 @@ namespace TelegramBot.Core
             builder.RegisterType<OtherLeaguesCommand>().As<IBotCommandHandler>().SingleInstance();
             builder.RegisterType<NowCommand>().As<IBotCommandHandler>().SingleInstance();
             builder.RegisterType<ResultsCommand>().As<IBotCommandHandler>().SingleInstance();
+            builder.RegisterType<Game15CommandHandler>().As<IBotCommandHandler>().SingleInstance();
+            builder.RegisterType<SettingsCommand>().As<IBotCommandHandler>().SingleInstance();
+            builder.RegisterType<LanguageCommandHandler>().As<IBotCommandHandler>().SingleInstance();
+            builder.RegisterType<TimeZoneEditCommand>().As<IBotCommandHandler>().SingleInstance();
         }
     }
 }

@@ -8,34 +8,34 @@ namespace TelegramBot.Core.Commands
 {
     public class LanguageCommandHandler : IBotCommandHandler
     {
-        readonly string[] commands = { "/language", "English", "Русский", "Українська" };
-        public string ProcessCommand(IApiRequest apiRequest, IDataManager dataManager, UpdateObject updateObject)
+        readonly string[] commands = { "/language", "English", "Русский" };
+        public string ProcessCommand(IApiRequest apiRequest, IDataManager dataManager, UpdateObject updateObject, UserData userData)
         {
             if (string.Equals(updateObject.message.text.Trim(), commands[0], StringComparison.InvariantCultureIgnoreCase))
             {
-                
+
                 apiRequest.ExecuteMethod(new sendMessage()
                 {
                     chat_id = updateObject.message.chat.id,
                     text = strings.LanguageCommandHandler_ProcessCommand_Select_language,
                     reply_markup = new ReplyKeyboardMarkup
                     {
-                        keyboard = commands.Skip(1).Select(s => new[] {new KeyboardButton() {text = s},} ).ToArray(),
-                        one_time_keyboard = true
+                        keyboard = commands.Skip(1).Select(s => new[] { new KeyboardButton() { text = s }, }).ToArray(),
+                        one_time_keyboard = false
                     }
                 });
             }
             else
             {
-                var userData = UserSettings.GetUserData(updateObject.message.@from.id);
                 userData.Language = GetLanguage(updateObject.message.text.Trim());
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(userData.Language);
-                
+
                 apiRequest.ExecuteMethod(new sendMessage()
                 {
                     chat_id = updateObject.message.chat.id,
                     text = strings.languageChanged
                 });
+                return "/settings";
             }
             return null;
         }
@@ -60,7 +60,7 @@ namespace TelegramBot.Core.Commands
             var userData = UserSettings.GetUserData(updateObject.message.@from.id);
             var previousCommand = userData.CommandsHistory.PreviousCommand;
             if (previousCommand == null) return false;
-            return commands[0].Equals(previousCommand.message.text.Trim()) && commands.Skip(1).Any(s => s.Equals(updateObject.message.text.Trim(), StringComparison.InvariantCultureIgnoreCase) );
+            return commands[0].Equals(previousCommand.message.text.Trim()) && commands.Skip(1).Any(s => s.Equals(updateObject.message.text.Trim(), StringComparison.InvariantCultureIgnoreCase));
 
         }
 

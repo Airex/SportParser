@@ -22,7 +22,7 @@ namespace SportParser
         string PARTICIPANT_INDEX = "PR";
         string SPECIAL_INDEX = "ST";
 
-        public ResultHolder Parse(string s)
+        public ResultHolder Parse(string s, int timeOffset)
         {
 
             ResultHolder result = new ResultHolder();
@@ -110,7 +110,7 @@ namespace SportParser
 
                     }
                     var league = result.Leagues[lableId];
-                    league.Events.Add(id, new Event(dic));
+                    league.Events.Add(id, new Event(dic, timeOffset));
 
                 }
                 else if (indexName == TOP_LEAGUES_INDEX)

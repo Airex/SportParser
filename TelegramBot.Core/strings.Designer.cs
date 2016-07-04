@@ -61,6 +61,42 @@ namespace TelegramBot.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Available commands:.
+        /// </summary>
+        internal static string Available_commands {
+            get {
+                return ResourceManager.GetString("Available_commands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available settings:.
+        /// </summary>
+        internal static string Available_settings {
+            get {
+                return ResourceManager.GetString("Available_settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        internal static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to you won. /15 to restart.
         /// </summary>
         internal static string Game15CommandHandler_ProcessCommand_you_won___15_to_restart {
@@ -88,6 +124,33 @@ namespace TelegramBot.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid value was entered.
+        /// </summary>
+        internal static string Invalid_value_was_entered {
+            get {
+                return ResourceManager.GetString("Invalid_value_was_entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Languge changed.
         /// </summary>
         internal static string languageChanged {
@@ -102,6 +165,141 @@ namespace TelegramBot.Core {
         internal static string LanguageCommandHandler_ProcessCommand_Select_language {
             get {
                 return ResourceManager.GetString("LanguageCommandHandler_ProcessCommand_Select_language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Live now:.
+        /// </summary>
+        internal static string Live_now {
+            get {
+                return ResourceManager.GetString("Live_now", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matches schedule on.
+        /// </summary>
+        internal static string Matches_schedule_on {
+            get {
+                return ResourceManager.GetString("Matches_schedule_on", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now.
+        /// </summary>
+        internal static string Now {
+            get {
+                return ResourceManager.GetString("Now", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Results.
+        /// </summary>
+        internal static string Results {
+            get {
+                return ResourceManager.GetString("Results", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Results on.
+        /// </summary>
+        internal static string Results_on {
+            get {
+                return ResourceManager.GetString("Results_on", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schedule.
+        /// </summary>
+        internal static string Schedule {
+            get {
+                return ResourceManager.GetString("Schedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your timezone offset from -12 to 12 or select {0} to attach you current location to identify it automatically..
+        /// </summary>
+        internal static string Select_your_timezone {
+            get {
+                return ResourceManager.GetString("Select_your_timezone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send my location.
+        /// </summary>
+        internal static string Send_my_location {
+            get {
+                return ResourceManager.GetString("Send_my_location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This feature is under development.
+        /// </summary>
+        internal static string This_feature_is_under_development {
+            get {
+                return ResourceManager.GetString("This_feature_is_under_development", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TimeZone.
+        /// </summary>
+        internal static string TimeZone {
+            get {
+                return ResourceManager.GetString("TimeZone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timezone identified as {1} {0} .
+        /// </summary>
+        internal static string Timezone_identified_as {
+            get {
+                return ResourceManager.GetString("Timezone_identified_as", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timezone was not identified. Continue to use default one..
+        /// </summary>
+        internal static string Timezone_was_not_identified__Continue_to_use_default_one {
+            get {
+                return ResourceManager.GetString("Timezone_was_not_identified__Continue_to_use_default_one", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timezone was updated.
+        /// </summary>
+        internal static string Timezone_was_updated {
+            get {
+                return ResourceManager.GetString("Timezone_was_updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today.
+        /// </summary>
+        internal static string Today {
+            get {
+                return ResourceManager.GetString("Today", resourceCulture);
             }
         }
         

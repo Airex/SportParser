@@ -117,22 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Available_commands" xml:space="preserve">
+    <value>Доступные команды:</value>
+  </data>
+  <data name="Available_settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
   <data name="Game15CommandHandler_ProcessCommand_your_move___15_to_restart" xml:space="preserve">
-    <value>Ваш ход. /15 что бы начать заново</value>
+    <value>your move. /15 to restart</value>
   </data>
   <data name="Game15CommandHandler_ProcessCommand_you_won___15_to_restart" xml:space="preserve">
-    <value>Вы выиграли. /15 что бы начать заново</value>
+    <value>you won. /15 to restart</value>
   </data>
   <data name="helpCommand" xml:space="preserve">
-    <value>Я бот. Список моих доступных комманд:</value>
+    <value>I am bot. My available commands are:</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Главное меню</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
   </data>
   <data name="languageChanged" xml:space="preserve">
     <value>Язык изменен</value>
   </data>
   <data name="LanguageCommandHandler_ProcessCommand_Select_language" xml:space="preserve">
-    <value>Выберите язык</value>
+    <value>Выберитре язык</value>
+  </data>
+  <data name="Live_now" xml:space="preserve">
+    <value>Сейчас идут:</value>
+  </data>
+  <data name="Matches_schedule_on" xml:space="preserve">
+    <value>Расписание на</value>
+  </data>
+  <data name="Now" xml:space="preserve">
+    <value>Сейчас</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>Результаты</value>
+  </data>
+  <data name="Results_on" xml:space="preserve">
+    <value>Результаты на</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Расписание</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="This_feature_is_under_development" xml:space="preserve">
+    <value>Данный функционал в разработке</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Таймзона</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Сегодня</value>
   </data>
   <data name="unknownCommand" xml:space="preserve">
-    <value>Неизвестная комманда. Введите /help для допольнительной информации.</value>
+    <value>Unknown command. Type /help for more info.</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="Select_your_timezone" xml:space="preserve">
+    <value>Введите значение смещения вашей временной зоны от -12 до 12 или используйте {0} что бы прикрепить ваше текущее местоположение для автоматического определения временной зоны.</value>
+  </data>
+  <data name="Timezone_was_updated" xml:space="preserve">
+    <value>Временная зона сохранена</value>
+  </data>
+  <data name="Invalid_value_was_entered" xml:space="preserve">
+    <value>Введено неверное значение.</value>
+  </data>
+  <data name="Send_my_location" xml:space="preserve">
+    <value>Мое местоположение</value>
+  </data>
+  <data name="Timezone_identified_as" xml:space="preserve">
+    <value>Временная зона определена как {1}  {0}</value>
+  </data>
+  <data name="Timezone_was_not_identified__Continue_to_use_default_one" xml:space="preserve">
+    <value>Не удалось определить временную зону. Продолжаем использовать текущую.</value>
   </data>
 </root>

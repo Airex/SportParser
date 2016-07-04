@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using TelegramBot.Contracts;
 
 namespace TelegramBot.Core.Commands
 {
     public abstract class DatesCommand : IBotCommandHandler
     {
-        public string ProcessCommand(IApiRequest apiRequest, IDataManager dataManager, UpdateObject updateObject)
+        public string ProcessCommand(IApiRequest apiRequest, IDataManager dataManager, UpdateObject updateObject, UserData userData)
         {
-            var userData = UserSettings.GetUserData(updateObject.message.@from.id);
             var text = updateObject.message.text;
 
-            if (text == EmojiUtils.HomeIcon + "Home")
+            if (text == EmojiUtils.HomeIcon + strings.Home)
             {
                 userData.OperationDate = DateTime.Now.Date;
                 return "/mainmenu";
             }
-            if (text == "Today")
+            if (text == strings.Today)
                 userData.OperationDate = DateTime.Now.Date;
             else
             {
@@ -42,13 +40,15 @@ namespace TelegramBot.Core.Commands
 
         private KeyboardButton[][] GetDatesKeyboard(DateTime date)
         {
-            KeyboardButton[][] k = GetDatesKeyboardInternal(date);
-            IList<KeyboardButton[]> list = new List<KeyboardButton[]>(k);
-            list.Add(new[] {new KeyboardButton() {text = EmojiUtils.HomeIcon+"Home"} });
+            var k = GetDatesKeyboardInternal(date);
+            var list = new List<KeyboardButton[]>(k)
+            {
+                new[] {new KeyboardButton {text = EmojiUtils.HomeIcon + strings.Home}}
+            };
             return list.ToArray();
         }
 
-        protected abstract KeyboardButton[][] GetDatesKeyboardInternal(DateTime date);
+        protected abstract IEnumerable<KeyboardButton[]> GetDatesKeyboardInternal(DateTime date);
 
         protected abstract string GetTitle();
 
@@ -59,7 +59,7 @@ namespace TelegramBot.Core.Commands
         {
             var text = updateObject.message.text;
             DateTime date;
-            return text =="Today" || text ==EmojiUtils.HomeIcon+"Home" || DateTime.TryParseExact(text, "dd.MM", null, DateTimeStyles.None, out date)||  CanHandleInternal(updateObject);
+            return text ==strings.Today || text ==EmojiUtils.HomeIcon+strings.Home || DateTime.TryParseExact(text, "dd.MM", null, DateTimeStyles.None, out date)||  CanHandleInternal(updateObject);
         }
 
         protected abstract bool CanHandleInternal(UpdateObject updateObject);

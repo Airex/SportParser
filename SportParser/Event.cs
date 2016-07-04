@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Configuration;
 using System.Threading;
 
@@ -7,8 +8,11 @@ namespace SportParser
 {
     public class Event : DataItem
     {
-        public Event(IDictionary<string, string> data) : base(data)
+        private readonly int _timeOffset;
+
+        public Event(IDictionary<string, string> data, int timeOffset) : base(data)
         {
+            _timeOffset = timeOffset;
         }
 
         public string LeagueId => this["labl_id"];
@@ -67,11 +71,11 @@ namespace SportParser
         public string CountryName => this["CC"];
         public string OriginalId => this["original_id"];
 
-        public DateTime StartUDateTime => DateTimeManager.FromTimeStamp(Convert.ToDouble(StartUTime));
+        public DateTime StartUDateTime => DateTimeManager.FromTimeStamp(Convert.ToDouble(StartUTime)).AddHours(_timeOffset);
 
         public override string ToString()
         {
-            return HomeName + " - " + AwayName;
+            return HomeName + " - " + AwayName + " @ "+StartUDateTime.ToString(CultureInfo.InvariantCulture);
         }
     }
 }

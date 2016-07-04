@@ -17,10 +17,19 @@ namespace TelegramBot.Core
             for (var i = startDate; i <= endDate; i=i.AddDays(1))
             {
                 
-                var text = date.Date == i ? "Today" : i.ToString("dd.MM");
+                var text = date.Date == i ? strings.Today : i.ToString("dd.MM");
                 list.Add(new KeyboardButton { text = text });
             }
             return SplitIntoCoulumns(list, 4);
+        }
+
+        public static KeyboardButton[][] BuildTimezoneKeyboard()
+        {
+            var enumerable = Enumerable.Range(-12,25);
+
+            var keyboardButtons = enumerable.Select(i =>  new KeyboardButton() {text = i.ToString()}).ToList();
+            
+            return SplitIntoCoulumns(keyboardButtons, 8);
         }
 
         public static T[][] SplitIntoCoulumns<T>(IList<T> list, int columns)

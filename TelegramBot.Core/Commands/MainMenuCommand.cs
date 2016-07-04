@@ -7,12 +7,12 @@ namespace TelegramBot.Core.Commands
     public class MainMenuCommand:IBotCommandHandler
     {
        
-        public string ProcessCommand(IApiRequest apiRequest, IDataManager dataManager, UpdateObject updateObject)
+        public string ProcessCommand(IApiRequest apiRequest, IDataManager dataManager, UpdateObject updateObject, UserData userData)
         {
-            string[] commands = {EmojiUtils.ScheduleIcon+"Schedule", EmojiUtils.ResultsIcon+"Results", EmojiUtils.NowIcon+"Now"};
+            string[] commands = {EmojiUtils.ScheduleIcon+strings.Schedule, EmojiUtils.ResultsIcon+strings.Results, EmojiUtils.NowIcon+strings.Now,EmojiUtils.SettingsIcon+strings.Settings};
             apiRequest.ExecuteMethod(new sendMessage()
             {
-                text = "Available commands:",
+                text = strings.Available_commands,
                 chat_id = updateObject.message.chat.id,
                 reply_to_message_id = updateObject.message.message_id,
                 reply_markup = new ReplyKeyboardMarkup()

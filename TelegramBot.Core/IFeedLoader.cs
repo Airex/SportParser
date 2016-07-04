@@ -5,7 +5,7 @@ namespace TelegramBot.Core
 {
     public interface IFeedLoader
     {
-        ResultHolder LoadData(DateTime date);
+        ResultHolder LoadData(DateTime date, string language, int timeOffset);
     }
 
    

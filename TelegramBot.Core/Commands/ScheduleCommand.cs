@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TelegramBot.Contracts;
@@ -7,20 +8,21 @@ namespace TelegramBot.Core.Commands
 {
     public class ScheduleCommand : DatesCommand
     {
-        protected override KeyboardButton[][] GetDatesKeyboardInternal(DateTime date)
+        protected override IEnumerable<KeyboardButton[]> GetDatesKeyboardInternal(DateTime date)
         {
             return KeyboardBuilder.BuildDateKeyboard(date, 7);
         }
 
         protected override string GetTitle()
         {
-            return  "Matches schedule on";
+            return  strings.Matches_schedule_on;
         }
 
         protected override string ProcessCommandInternal(IApiRequest apiRequest, IDataManager dataManager, UpdateObject updateObject,
             DateTime operationDate)
         {
-            var result = dataManager.ExecuteCommand(new TopOnlyLeaguesByDate(operationDate));
+            var userData = UserSettings.GetUserData(updateObject.message.@from.id);
+            var result = dataManager.ExecuteCommand(new TopOnlyLeaguesByDate(operationDate), userData.Language, userData.TimeZoneOffset);
 
 
             var leagues = result.SingleOrDefault().Value;
@@ -59,7 +61,7 @@ namespace TelegramBot.Core.Commands
        protected override bool CanHandleInternal(UpdateObject updateObject)
         {
             var text = updateObject.message.text;
-            return text.StartsWith(EmojiUtils.ScheduleIcon, StringComparison.InvariantCultureIgnoreCase) ||
+            return text.StartsWith(EmojiUtils.ScheduleIcon+strings.Schedule, StringComparison.InvariantCultureIgnoreCase) ||
                    text.StartsWith("/schedule", StringComparison.InvariantCultureIgnoreCase);
         }
 

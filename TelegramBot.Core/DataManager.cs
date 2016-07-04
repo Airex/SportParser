@@ -10,7 +10,7 @@ namespace TelegramBot.Core
 {
     public class DataManager : IDataManager
     {
-        private readonly IDictionary<DateTime, DataContainer> _data = new ConcurrentDictionary<DateTime, DataContainer>();
+        private readonly ConcurrentDictionary<CacheKey, DataContainer> _data = new ConcurrentDictionary<CacheKey, DataContainer>();
         private readonly IUpdateStrategy _updateStrategy;
         private readonly IFeedLoader _feedLoader;
         private static readonly object lockObject = new object();
@@ -21,35 +21,61 @@ namespace TelegramBot.Core
             _feedLoader = feedLoader;
         }
 
-        private ResultHolder GetData(DateTime date, bool forceUpdate)
+        private ResultHolder GetData(DateTime date, bool forceUpdate, string language, int timeOffset)
         {
+            Console.WriteLine();
             var now = DateTime.Now.Date;
             var timeSpan = date.Date - now;
             if (Math.Abs(timeSpan.TotalDays) > 7)
                 throw new InvalidOperationException("Date difference should be less then 7 days");
-            lock (lockObject)
+            var dataContainer = _data.GetOrAdd(new CacheKey(), key =>
             {
-                if (_data.ContainsKey(date.Date))
-                {
-                    var container = _data[date.Date];
-                    if (container.Data == null || forceUpdate || _updateStrategy.NeedUpdate(container.LastUpdate,date))
-                    {
-                        var result = _feedLoader.LoadData(date.Date);
-                        _data[date.Date].Update(result);
-                    }
-                }
-                else
-                {
-                    var result = _feedLoader.LoadData(date.Date);
-                    _data.Add(date.Date, new DataContainer(result));
-                }
-                return _data[date.Date].Data;
+                var result = _feedLoader.LoadData(date.Date, language, timeOffset);
+                return new DataContainer(result);
+            });
+            if ( forceUpdate || _updateStrategy.NeedUpdate(dataContainer.LastUpdate, DateTime.Now))
+            {
+                var result = _feedLoader.LoadData(date.Date, language, timeOffset);
+                dataContainer.Update(result);
             }
+
+            return dataContainer.Data;
         }
 
-        public IDictionary<DateTime, League[]> ExecuteCommand(ICommand command)
+        public IDictionary<DateTime, League[]> ExecuteCommand(ICommand command, string language, int timeOffset)
         {
-            return command.Execute(GetData);
+            return command.Execute((time, b) => GetData(time, b, language, timeOffset));
+        }
+    }
+
+    public class CacheKey
+    {
+        public string Language { get; set; }
+        public DateTime Date { get; set; }
+        public int TimeOffset { get; set; }
+
+        protected bool Equals(CacheKey other)
+        {
+            return string.Equals(Language, other.Language) && Date.Equals(other.Date) && TimeOffset == other.TimeOffset;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((CacheKey) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = Language?.GetHashCode() ?? 0;
+                hashCode = (hashCode*397) ^ Date.GetHashCode();
+                hashCode = (hashCode*397) ^ TimeOffset;
+                return hashCode;
+            }
         }
     }
 }

@@ -6,6 +6,6 @@ namespace TelegramBot.Core
 {
     public interface IDataManager
     {
-        IDictionary<DateTime, League[]> ExecuteCommand(ICommand command);
+        IDictionary<DateTime, League[]> ExecuteCommand(ICommand command, string language, int timeOffset);
     }
 }
